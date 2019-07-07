@@ -1,11 +1,19 @@
 const router = require("express").Router();
+const User = require("../model/User");
 
-router.post("/register", (request, response) => {
-    response.send("Success!");
-});
+router.post("/register", async (request, response) => {
+    const user = new User({
+        name: request.body.name,
+        email: request.body.email,
+        password: request.body.password
+    });
 
-router.post("/login", (request, response) => {
-    response.send("Success!");
+    try {
+        const savedUser = await user.save();
+        response.send(savedUser);
+    } catch (err) {
+        response.status(400).send(err);
+    }
 });
 
 module.exports = router;
