@@ -5,6 +5,7 @@ const app = express();
 
 // Importing routes
 const auth_route = require("./routes/auth");
+const posts_route = require("./routes/posts");
 
 dotenv.config();
 
@@ -23,6 +24,8 @@ app.use(express.json());
 // Route middlewares
 //  Works like localhost:3000/api/user/register
 app.use("/api/user", auth_route);
+
+app.use("/api/posts", posts_route);
 
 app.listen(3000, () => {
     console.log("Running server!");
